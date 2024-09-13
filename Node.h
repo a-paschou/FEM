@@ -1,5 +1,6 @@
 #pragma once
-class Node
+#include "DOF.h"
+class Node : public DOF
 {
 protected:
 	int ID;

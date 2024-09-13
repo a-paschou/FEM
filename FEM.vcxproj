@@ -106,12 +106,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Documents\Projects\FEM_\LinearAlgebra</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Documents\Projects\FEM_\LinearAlgebra;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -131,18 +134,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoundaryConditions.cpp" />
     <ClCompile Include="CST.cpp" />
+    <ClCompile Include="DirichletBoundaryConditions.cpp" />
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="NeumannBoundaryConditions.cpp" />
     <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CST.h" />
+    <ClInclude Include="DirichletBoundaryConditions.h" />
+    <ClInclude Include="DOF.h" />
+    <ClInclude Include="DOFType.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Element.h" />
+    <ClInclude Include="BoundaryConditions.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="NeumannBoundaryConditions.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="StressStrainRelation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinearAlgebra\LinearAlgebra.vcxproj">
+      <Project>{ae6ced16-11b4-411f-af2a-baae4a40f862}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
