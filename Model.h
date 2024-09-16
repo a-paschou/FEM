@@ -16,7 +16,7 @@ private:
 protected:
 	std::vector<double>* rhs;
 public:
-	Model(Grid*);
+	//Model(Grid*);
 	Model(Grid*, BoundaryConditions*);
 	Matrix* GetLeftHandSide();
 	std::vector<double>* GetRightHandSide();

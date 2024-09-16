@@ -1,9 +1,11 @@
 #include "Model.h"
+#include <iostream>
 int Model::FindNewDOFIndexWithBCs(int index, std::vector<int>* indicesBCs)
 {
+	int initialIndex{ index };
 	for (size_t i = 0; i < indicesBCs->size(); i++)
 	{
-		if (indicesBCs->at(i) < index)
+		if (indicesBCs->at(i) <= initialIndex)
 		{
 			index--;
 		}
@@ -39,18 +41,17 @@ void Model::BuildStiffnessMatrix()
 	dimension -= dirichletDOFsIndices.size();
 	std::vector<double> stiffnessMatrix(dimension * dimension);
 	std::vector<double> elementStiffnessMatrix;
-	std::vector<Node*> elementsNodes;
 	int* indices{ nullptr };
 	for (std::pair<const int, Element*> &element : grid->elementsMap)
 	{
 		int nNodes{ element.second->GetNumberOfNodes() };
 		indices = new int[nNodes * nDOFsPerNode];
+		std::vector<Node*> elementsNodes;
 		for (size_t i = 0; i < nNodes; i++)
 		{
 			elementsNodes.push_back(grid->nodesMap.find(element.second->GetNodeID(i))->second);
 		}
 		elementStiffnessMatrix = *element.second->CalculateStiffnessMatrix(&elementsNodes, element.second->GetThickness());
-		
 		int nodeID{};
 		for (size_t i = 0; i < nNodes; i++)
 		{
